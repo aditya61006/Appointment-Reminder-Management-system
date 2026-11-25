@@ -1,22 +1,15 @@
-
-# 1. Create project
-cd C:\xampp\htdocs
+1. Create project
 laravel new ProjectName
 
-# 2. Enter project
-cd ProjectName
-
-# 3. Install dependencies
+2. Install dependencies
 composer install
 npm install
 
-# 4. Generate application key
+3. Generate application key
 php artisan key:generate
 
-# 5. Configure .env manually for MySQL
-# Create database in phpMyAdmin first.
 
-# 6. Clear configuration
+6. Clear configuration
 php artisan config:clear
 
 # 7. Run migrations

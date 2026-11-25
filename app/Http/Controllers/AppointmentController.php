@@ -37,4 +37,33 @@ class AppointmentController extends Controller
         $appointment = Appointment::findOrFail($id);
         return view('admin.appointments.edit',compact('appointment'));
     }
+
+    public function update(Request $request, $id ){
+        $appointment = Appointment::findOrFail($id);
+        $validate = $request->validate([
+            'customer_name' => 'required|string|max:255',
+            'customer_email'=> 'required|email',
+            'phone' => 'required|string|max:10',
+            'appointment_date' => 'required|date',
+            'appointment_time' => 'required',
+            'description' => 'nullable|string',
+        ]);
+
+        // error_log($appointment); 
+        $appointment->update($validate);  
+
+        return redirect()->route('admin.appointments.index')->with('success','Appointment update successfully!');
+    }
+
+    public function view($id){
+        $appointment = Appointment::findOrFail($id);
+        return view('admin.appointments.show',compact('appointment'));
+    }
+
+    public function delete($id){
+        $appointment = Appointment::findOrFail($id);
+        $appointment->delete();
+
+        return redirect()->route('admin.appointments.index')->with('success','Appointment cancelled successfully!');
+    }
 }
