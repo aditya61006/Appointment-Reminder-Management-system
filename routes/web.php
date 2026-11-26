@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\ReminderController;
 use App\Http\Controllers\UserController;
+use App\Models\Reminder;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Support\Facades\Auth;
@@ -39,14 +41,20 @@ Route::post('/admin/authenticate', [AdminController::class, 'authenticate'])->na
 Route::middleware('admin')->group(function (){
     
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+
     Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
-        Route::get('/admin/appointments', [AppointmentController::class, 'index'])->name('admin.appointments.index');
+
+    Route::get('/admin/appointments', [AppointmentController::class, 'index'])->name('admin.appointments.index');
     Route::get('/admin/appointment/create',[AppointmentController::class,'create'])->name('admin.appointments.create');
     Route::post('/admin/appointments', [AppointmentController::class, 'store'])->name('admin.appointments.store');
     Route::get('/admin/appointments/{id}/edit', [AppointmentController::class, 'edit'])->name('admin.appointments.edit');
     Route::put('/admin/appointments/{id}',[AppointmentController::class,'update'])->name('admin.appointments.update');
     Route::get('/admin/appointments/{id}', [AppointmentController::class, 'delete'])->name('admin.appointments.delete');
     Route::get('/admin/appointments/{id}/view', [AppointmentController::class, 'view'])->name('admin.appointments.view');
+
+    Route::get('/admin/reminders',[ReminderController::class, 'index'])->name('admin.reminders.index');
+    Route::get('/admin/reminders/create', [ReminderController::class,'create'])->name('admin.reminders.create');
 
 });
 

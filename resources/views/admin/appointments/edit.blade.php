@@ -32,12 +32,32 @@
 
             <div class="mb-3">
                 <label class="form-label">Appointment Date</label>
-                <input type="date" name="appointment_date" class="form-control" value="{{ $appointment->appointment_date }}">
+                <input type="date" name="appointment_date" class="form-control"
+                    value="{{ $appointment->appointment_date }}">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Appointment Time</label>
-                <input type="time" name="appointment_time" class="form-control " value="{{ $appointment->appointment_time }}">
+                <input type="time" name="appointment_time" class="form-control "
+                    value="{{ $appointment->appointment_time }}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Appointment Status</label>
+
+                <select name="status" class="form-select">
+                    <option value="pending" {{ $appointment->status == 'pending' ? 'selected' : '' }}>
+                        Pending
+                    </option>
+
+                    <option value="completed" {{ $appointment->status == 'completed' ? 'selected' : '' }}>
+                        Completed
+                    </option>
+
+                    <option value="cancelled" {{ $appointment->status == 'cancelled' ? 'selected' : '' }}>
+                        Cancelled
+                    </option>
+                </select>
             </div>
 
             <div class="mb-3">

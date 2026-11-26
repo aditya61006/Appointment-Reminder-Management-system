@@ -12,13 +12,13 @@ php artisan key:generate
 6. Clear configuration
 php artisan config:clear
 
-# 7. Run migrations
+7. Run migrations
 php artisan migrate
 
-# 8. Start Laravel server
+8. Start Laravel server
 php artisan serve
 
-# 9. Start frontend server in another terminal
+9. Start frontend server in another terminal
 npm run dev
 
 

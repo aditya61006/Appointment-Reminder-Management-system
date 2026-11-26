@@ -8,11 +8,24 @@ use Illuminate\Support\Facades\App;
 
 class AppointmentController extends Controller
 {
-    public function index(){
-        $appointments = Appointment::all(); // getting all records from db table appointments
-        return  view('admin.appointments.index',compact('appointments'));
-    }
+    public function index(Request $request)
+    {
+        $search = $request->search;
+        $status = $request->status;
 
+        $appointments = Appointment::query()->when($search, function ($query) use ($search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('customer_name', 'like', "%{$search}%")
+                        ->orWhere('customer_email', 'like', "{$search}");
+                });
+            })
+
+            ->when($status, function ($query) use ($status) {
+                $query->where('status', $status);
+            })->latest()->paginate()->withQueryString();
+
+        return view('admin.appointments.index', compact('appointments'));
+    }
     public function create(){
          return view('admin.appointments.create');
     }
@@ -46,6 +59,7 @@ class AppointmentController extends Controller
             'phone' => 'required|string|max:10',
             'appointment_date' => 'required|date',
             'appointment_time' => 'required',
+            'status' => 'required|in:pending,completed,cancelled',
             'description' => 'nullable|string',
         ]);
 

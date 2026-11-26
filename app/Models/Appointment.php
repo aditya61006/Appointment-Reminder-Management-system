@@ -16,5 +16,9 @@ class Appointment extends Model
         'description',
     ];
 
+    public function reminders(){
+        return $this->hasMany(Reminder::class);
+    }
+
     
 }

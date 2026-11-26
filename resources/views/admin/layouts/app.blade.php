@@ -31,7 +31,7 @@
                     </li>
 
                     <li class="nav-item mb-3">
-                        <a href="#" class="nav-link text-white">
+                        <a href="{{ route('admin.reminders.index') }}" class="nav-link text-white">
                             Reminders
                         </a>
                     </li>

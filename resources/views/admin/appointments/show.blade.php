@@ -10,7 +10,13 @@
         <p><strong>Phone:</strong> {{ $appointment->phone }}</p>
         <p><strong>Date:</strong> {{ $appointment->appointment_date }}</p>
         <p><strong>Time:</strong> {{ $appointment->appointment_time }}</p>
-        <p><strong>Status:</strong> {{ $appointment->status }}</p>
+        <p><strong>Status:</strong> @if($appointment->status == 'pending')
+            <span class="badge bg-warning text-dark">Pending</span>
+        @elseif($appointment->status == 'completed')
+            <span class="badge bg-success">Completed</span>
+        @elseif($appointment->status == 'cancelled')
+            <span class="badge bg-danger">Cancelled</span>
+        @endif</p>
         <p><strong>Description:</strong> {{ $appointment->description }}</p>
 
         <a href="{{ route('admin.appointments.index') }}" class="btn btn-secondary">
